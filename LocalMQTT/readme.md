@@ -1,4 +1,4 @@
-#Local MQTT python server
+# Local MQTT python server
 1. install miniconda and add it to path
 2. run batch file and you are good.
 
