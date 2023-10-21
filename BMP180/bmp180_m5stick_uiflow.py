@@ -14,7 +14,7 @@ class BMP180:
     BMP180_COMMAND_PRESSURE1 = 0x74
     BMP180_COMMAND_PRESSURE2 = 0xB4
     BMP180_COMMAND_PRESSURE3 = 0xF4
-    
+
     def __init__(self, i2c):
         self.i2c = i2c
         self.AC1 = self.AC2 = self.AC3 = self.VB1 = self.VB2 = self.MB = self.MC = self.MD = 0
@@ -22,6 +22,11 @@ class BMP180:
         self.c5 = self.c6 = self.mc = self.md = self.x0 = self.x1 = self.x2 = 0.0
         self.y0 = self.y1 = self.y2 = self.p0 = self.p1 = self.p2 = 0.0
         self._error = ''
+        self.last_temperature = None
+        self.last_pressure = None
+        self.sampling_rate = 1  # Default sampling rate
+        self.init()
+        self.UpdateReading()
     
     def readInt(self, addr):
         return self.i2c.read_mem_data(addr, 1, i2c_bus.INT16BE)[0]
@@ -43,7 +48,24 @@ class BMP180:
         except Exception as e:
             self._error = str(e)
             return 0
-
+    def GetTemperature(self):
+        return self.last_temperature
+    
+    def GetPressure(self):
+        return self.last_pressure
+    
+    def SetSampling(self, rate):
+        self.sampling_rate = rate
+    
+    def UpdateReading(self):
+        temp_delay = self.startTemperature()
+        wait_ms(temp_delay)
+        self.last_temperature = self.getTemperature()
+        
+        pres_delay = self.startPressure(self.sampling_rate)
+        wait_ms(pres_delay)
+        self.last_pressure = self.getPressure(self.last_temperature)
+        
     def startTemperature(self):
         data = [self.BMP180_REG_CONTROL, self.BMP180_COMMAND_TEMPERATURE]
         result = self.writeBytes(data)
@@ -177,21 +199,15 @@ label0 = M5TextBox(3, 26, "BMP180", lcd.FONT_UNICODE, 0x00c7ff, rotate=0)
 
 i2c0 = i2c_bus.easyI2C((26, 0), 0x00, freq=400000)
 i2c0.addr=(0x77)
+
 lbStatus.setText(str(i2c0.scan()))
+
 bmp180 = BMP180(i2c0)
-init_result = bmp180.init()
-tempinit = bmp180.startTemperature()
+bmp180.SetSampling(1)
+bmp180.UpdateReading()
+Tinit = bmp180.GetTemperature()
+pres = bmp180.GetPressure()
 
-if(tempinit>0):
-    wait_ms(tempinit)
-Tinit = bmp180.getTemperature()[1]
-lbStatus.setText(str(init_result)+" "+str(Tinit))
-lbTemp.setText("{:.2f}".format(Tinit)+" C˚")
-
-presDelay = bmp180.startPressure(1)
-if(presDelay>0):
-  lbStatus.setText("pressure..")
-  wait_ms(presDelay)
-pres = bmp180.getPressure(Tinit)[1]
+lbTemp.setText("{:.2f}".format(Tinit) + " C˚")
 lbPres.setText("{:.2f}".format(pres) + " mb")
 lbPresText.setText(describe_pressure(pres))
