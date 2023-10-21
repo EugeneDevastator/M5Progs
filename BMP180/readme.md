@@ -1,1 +1,1 @@
-![m5stick connection](/bmp180/connection.png)
+![m5stick connection](/main/bmp180/connection.png)
