@@ -1,0 +1,30 @@
+// Block __custom_untitled
+var __custom_untitled_json = {
+    "previousStatement": null,
+    "nextStatement": null,
+    "message0": "%1 %2",
+    "args0": [
+        {
+            "type": "field_label",
+            "text": "asd"
+        },
+        {
+            "type": "input_statement",
+            "name": "asd"
+        }
+    ],
+    "colour": "#333333"
+};
+
+window['Blockly'].Blocks['__custom_untitled'] = {
+    init: function() {
+        this.jsonInit(__custom_untitled_json);
+    }
+};
+
+window['Blockly'].Python['__custom_untitled'] = function(block) {
+    var asd = Blockly.Python.statementToCode(block, 'asd', Blockly.Python.ORDER_NONE);
+    return `${asd}` + "\n";
+};
+
+
