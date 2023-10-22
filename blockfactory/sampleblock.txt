@@ -1,0 +1,25 @@
+var __MyLibName_myblock_json={
+  "type": "myblock",
+  "message0": "put a bool in here %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "varinput",
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+};
+window['Blockly'].Blocks['__MyLibName_myblock'] = {
+ init: function() { 
+  this.jsonInit(__MyLibName_myblock_json); 
+ }
+};
+window['Blockly'].Python['__MyLibName_myblock'] = function(block) {
+  var varinput = Blockly.Python.valueToCode(block, 'varinput', Blockly.Python.ORDER_NONE);
+  return `print(${varinput})`+"\\n";
+};
+

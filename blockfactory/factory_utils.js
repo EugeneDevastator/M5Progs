@@ -89,10 +89,10 @@ FactoryUtils.getGeneratorStub = function(block, generatorLanguage) {
   var code = [];
 
   code.push(`window['Blockly'].Blocks['__`+this.GetLibName()+`_${block.type}'] = {`+
-    "init: function() { this.jsonInit(__libname_myblock_json); };");
+    "\n init: function() { \n  this.jsonInit(__"+this.GetLibName()+"_"+`${block.type}`+"_json); \n }\n};");
 
   code.push(`window['Blockly'].Python['__`+this.GetLibName()+`_${block.type}'] = ` +
-            'function(block, generator) {');
+            'function(block) {');
 
   // Generate getters for any fields or inputs.
   for (var i = 0, input; input = block.inputList[i]; i++) {
@@ -125,8 +125,8 @@ FactoryUtils.getGeneratorStub = function(block, generatorLanguage) {
     if (name) {
       if (input.type === Blockly.INPUT_VALUE) {
         code.push(`${makeVar('value', name)} = ` +
-                  `generator.valueToCode(block, '${name}', ` +
-                  `${language}.Order.ATOMIC);`);
+                  `Blockly.Python.valueToCode(block, '${name}', ` +
+                  `Blockly.Python.Order_NONE);`);
       } else if (input.type === Blockly.NEXT_STATEMENT) {
         code.push(`${makeVar('statements', name)} = ` +
                   `Blockly.Python.statementToCode(block, '${name}');`);
@@ -143,11 +143,11 @@ FactoryUtils.getGeneratorStub = function(block, generatorLanguage) {
   };
   code.push("  // TODO: Assemble " + language + " into code variable.");
   if (block.outputConnection) {
-    code.push("  var code = '...';");
+    code.push("  var code = `...`;");
     code.push("  // TODO: Change ORDER_NONE to the correct strength.");
-    code.push("  return [code, Blockly." + language + ".ORDER_NONE];");
+    code.push("  return [code, Blockly.Python.ORDER_NONE];");
   } else {
-    code.push("  var code = '..." + (lineEnd[language] || '') + "\\n';");
+    code.push("  var code = `..." + (lineEnd[language] || '') + "\\n`;");
     code.push("  return code;");
   }
   code.push("};");

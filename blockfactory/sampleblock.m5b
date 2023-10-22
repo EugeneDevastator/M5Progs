@@ -1,0 +1,8 @@
+{
+    "blocks": [
+        "__MyLibName_myblock"
+    ],
+    "category": "SampleLib",
+    "color": "#b14420",
+    "jscode": "var __MyLibName_myblock_json={\n  \"type\": \"myblock\",\n  \"message0\": \"put a bool in here %1\",\n  \"args0\": [\n    {\n      \"type\": \"input_value\",\n      \"name\": \"varinput\",\n    }\n  ],\n  \"previousStatement\": null,\n  \"nextStatement\": null,\n  \"colour\": 230,\n  \"tooltip\": \"\",\n  \"helpUrl\": \"\"\n};\nwindow['Blockly'].Blocks['__MyLibName_myblock'] = {\n init: function() { \n  this.jsonInit(__MyLibName_myblock_json); \n }\n};\nwindow['Blockly'].Python['__MyLibName_myblock'] = function(block) {\n  var varinput = Blockly.Python.valueToCode(block, 'varinput', Blockly.Python.ORDER_NONE);\n  return `print(${varinput})`+\"\\n\";\n};\n\n"
+}
