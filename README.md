@@ -14,8 +14,8 @@ This is extracted folder from blockly repo. It looks like uiflow supports it syn
 This is WIP, however some customizations were made to make code appear on export tab.
 You will need to get full repo and start it via:
 ```
-nmp install
-nmp run build
+npm install
+npm run build
 python -m http.server
 ```
 
