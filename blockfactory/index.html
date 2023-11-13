@@ -286,36 +286,37 @@
     </aside>
   </div>
 
-  <!-- Blockly Factory Tab -->
-  <table id="blockFactoryContent">
-    <tr width="100%" height="10%">
-      <td width="50%" height="5%">
-        <table>
-          <tr id="blockLibrary">
-            <td id="blockLibraryContainer">
-            <span>
-              <div class="dropdown">
-                <button id="button_blockLib">Block Library</button>
-                <div id="dropdownDiv_blockLib" class="dropdown-content">
-                  <a id="createNewBlockButton">Create New Block</a>
-                </div>
+  <div class="flex-container" style="display: flex; flex-direction: column; height: 100%; width: 100%;">
+
+    <!-- Top Row -->
+    <div class="top-row" style="display: flex; flex-grow: 1;">
+  
+      <!-- Left Column -->
+      <div class="left-column" style="display: flex; flex-direction: row; flex-basis: 50%;">
+        <div class="block-library" style="flex-grow: 1; flex-direction: row;">
+          <span>
+            <div class="dropdown">
+              <button id="button_blockLib">Block Library</button>
+              <div id="dropdownDiv_blockLib" class="dropdown-content">
+                <a id="createNewBlockButton">Create New Block</a>
               </div>
-              <select id="blockLibraryDropdown" style="display:none">
-              </select>
-            </span>
-            </td>
-            <td id="blockLibraryControls">
+            </div>
+            <select id="blockLibraryDropdown" style="display:none">
+            </select>
+          </span>
+        </div>
+        <div class="block-library-controls" style="flex-grow: 1;">
             <button id="saveToBlockLibraryButton" title="Save block to Block Library.">
               Save "block_type"
             </button>
             <button id="removeBlockFromLibraryButton" title="Remove block from Block Library.">
               Delete "block_type"
             </button>
-            </td>
-          </tr>
-        </table>
-      </td>
-      <td height="5%">
+        </div>
+      </div>
+  
+      <!-- Right Column -->
+      <div class="right-column" style="flex-grow: 1;">
         <table id="blockFactoryPreview">
           <tr>
             <td id="previewContainer">
@@ -344,15 +345,38 @@
             </td>
           </tr>
         </table>
-      </td>
-    </tr>
-    <tr height="80%">
-      <td id="blocklyWorkspaceContainer">
+      </div>
+    </div>
+  
+    <!-- Bottom Row -->
+    <div class="bottom-row" style="display: flex; flex-grow: 16;">
+  
+      <!-- Blockly Workspace -->
+      <div id="blocklyWorkspaceContainer" style="flex-basis: 30%;">
         <div id="blockly"></div>
         <div id="blocklyMask"></div>
-      </td>
-      <td width="50%">
-        <table id="blocklyPreviewContainer">
+      </div>
+  
+      <!-- Middle Column -->
+      <div class="middle-column" style="flex-basis: 40%;">
+        <table style="width: 100%; height: 100%;">
+          <tr style="height: 70%;">
+            <td>
+              <textarea id="pythonEditor" style="width: 100%; height: 100%;"># Python code here</textarea>
+            </td>
+          </tr>
+          <tr style="height: 30%;">
+            <td style="display: flex;">
+              <textarea id="m5blockEditor" style="flex-grow: 1;"># Other text here</textarea>
+              <button id="m5saveButton" onclick="saveContent()">Save</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+  
+      <!-- Right Column -->
+      <div class="right-column" style="flex-grow: 1;">
+        <table id="blocklyPreviewContainer" margin="10px">
           <tr>
             <td height="30%">
               <div id="preview"></div>
@@ -405,9 +429,11 @@
             </td>
           </tr>
         </table>
-      </td>
-      </tr>
-  </table>
+      </div>
+  
+    </div>
+  
+  </div>
 
   <div id="modalShadow"></div>
 
