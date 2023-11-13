@@ -284,9 +284,9 @@
         <div id="preview_blocks" class="content"></div>
       </div>
     </aside>
-  </div>
+  </div> 
 
-  <div class="flex-container" style="display: flex; flex-direction: column; height: 100%; width: 100%;">
+  <div id="blockFactoryContent" class="flex-container" style="display: flex; flex-direction: column; height: 80%; width: 100%;">
 
     <!-- Top Row -->
     <div class="top-row" style="display: flex; flex-grow: 1;">
@@ -359,19 +359,21 @@
   
       <!-- Middle Column -->
       <div class="middle-column" style="flex-basis: 40%;">
-        <table style="width: 100%; height: 100%;">
-          <tr style="height: 70%;">
-            <td>
-              <textarea id="pythonEditor" style="width: 100%; height: 100%;"># Python code here</textarea>
-            </td>
-          </tr>
-          <tr style="height: 30%;">
-            <td style="display: flex;">
-              <textarea id="m5blockEditor" style="flex-grow: 1;"># Other text here</textarea>
-              <button id="m5saveButton" onclick="saveContent()">Save</button>
-            </td>
-          </tr>
-        </table>
+        <div style="display: flex; flex-direction: column; height: 100%; width: 100%;">
+
+          <!-- Python Editor Section -->
+          <div style="flex-grow: 7; flex-basis: 0; height: 0;">
+            <textarea id="pythonEditor" style="width: 95%; height: 95%; resize: none;"># Python code here</textarea>
+          </div>
+        
+          <!-- m5 Block Editor Section -->
+          <div style="flex-grow: 3; flex-basis: 0; display: flex; height: 0;">
+            <textarea id="m5blockEditor" style="flex-grow: 1; resize: none;"># Other text here</textarea>
+            <button id="m5saveButton" onclick="saveContent()">Save</button>
+          </div>
+        
+        </div>
+        
       </div>
   
       <!-- Right Column -->

@@ -143,11 +143,11 @@ FactoryUtils.getGeneratorStub = function(block, generatorLanguage) {
   };
   code.push("  // TODO: Assemble " + language + " into code variable.");
   if (block.outputConnection) {
-    code.push("  var code = `...`;");
+    code.push(`  var code = PYCODE:${block.type};`);
     code.push("  // TODO: Change ORDER_NONE to the correct strength.");
     code.push("  return [code, Blockly.Python.ORDER_NONE];");
   } else {
-    code.push("  var code = `..." + (lineEnd[language] || '') + "\\n`;");
+    code.push(`  var code = PYCODE:${block.type} +"\\n";`);
     code.push("  return code;");
   }
   code.push("};");
@@ -263,7 +263,7 @@ FactoryUtils.formatJson_ = function(blockType, rootBlock) {
 
   JS.tooltip = FactoryUtils.getTooltipFromRootBlock_(rootBlock);
   JS.helpUrl = FactoryUtils.getHelpUrlFromRootBlock_(rootBlock);
-
+  
   return JSON.stringify(JS, null, '  ');
 };
 
