@@ -7,3 +7,6 @@ so basically take sampleblock.txt
 convert all newlines to \n
 and " to \"
 also if you already have \n it must be converted to \\n 
+
+also see davecoffee2.m5b
+simply it is one long code block, and blcok defs above;

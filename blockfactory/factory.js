@@ -156,6 +156,9 @@ BlockFactory.updateGenerator = function(block) {
   var language = document.getElementById('language').value;
   var generatorStub = FactoryUtils.getGeneratorStub(block, language);
   FactoryUtils.injectCode(generatorStub, 'generatorPre');
+  var code = document.getElementById('languageTA').value;
+  document.getElementById('pythonEditor').value = 
+  `var __${FactoryUtils.GetLibName()}_${block.type}_json=`+code+ ";\n" + generatorStub;
 };
 
 /**
